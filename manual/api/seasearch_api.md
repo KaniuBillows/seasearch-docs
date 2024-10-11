@@ -4,7 +4,12 @@
 
 SeaSearch uses Http Basic Auth for permission verification, and the API request needs to carry the corresponding token in the header.
 
-Generate basic auth through this tool: [http://web.chacuo.net/safebasicauth](http://web.chacuo.net/safebasicauth)
+```
+# headers
+{
+  'Authorization': 'Basic <basic auth token>'
+}
+```
 
 ## User management
 
