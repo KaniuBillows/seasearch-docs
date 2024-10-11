@@ -1,7 +1,5 @@
 # Deploy
 
-Note: SeaSearch only supports deployment via docker now.
-
 ## Download the seasearch.yml
 
 ```bash

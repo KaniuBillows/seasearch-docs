@@ -45,6 +45,7 @@ markdown_extensions:
 
 # Page tree
 nav:
+  - Introduction: README.md
   - Deploy: deploy/README.md
   - Configuration: config/README.md
   - SeaSearch API: api/seasearch_api.md

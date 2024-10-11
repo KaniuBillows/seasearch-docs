@@ -33,44 +33,6 @@ ZINC_S3_PATH_STYLE_REQUEST=<your s3 style request path>
 ZINC_S3_AWS_REGION=<your s3 AWS region>
 ```
 
-## Cluster Configurations
-
-### Basic Configurations
-
-```shell
-# default none for standalone deployment, optional to cluster, must be cluster for cluster deployment
-ZINC_SERVER_MODE=
-
-# cluster id，need to be globally unique
-ZINC_CLUSTER_ID=<your cluster id>
-
-ZINC_ETCD_ENDPOINTS=<your etcd address> 
-ZINC_ETCD_USERNAME=<your etcd username>
-ZINC_ETCD_PASSWORD=<your etcd password>
-```
-
-### Proxy Configurations
-If the current node is a proxy node, the term `ZINC_SERVER_MODE` has to be set as **proxy** and the `ZINC_ETCD_ENDPOINTS` has to be pointed (i.e., =127.0.0.1:2379).
-
-```shell
-ZINC_CLUSTER_PROXY_LOG_DIR=/opt/seasearch/data/log 
-ZINC_CLUSTER_PROXY_HOST=0.0.0.0
-ZINC_CLUSTER_PROXY_PORT=4082
-ZINC_ETCD_PREFIX=<yout etcd perfix, default /zinc>
-ZINC_MAX_DOCUMENT_SIZE=1m # Bulk and multisearch limit on the maximum single document，default 1m 
-ZINC_CLUSTER_MANAGER_ADDR=127.0.0.1:4081 # manager address
-```
-
-### Cluster-manger Configurations
-
-```shell
-ZINC_CLUSTER_MANAGER_LOG_DIR=/opt/seasearch/data/log
-ZINC_CLUSTER_MANAGER_HOST=0.0.0.0
-ZINC_CLUSTER_MANAGER_PORT=4081
-ZINC_CLUSTER_MANAGER_ETCD_ENDPOINTS=<your etcd endpoints>
-ZINC_CLUSTER_MANAGER_ETCD_PREFIX=<yout etcd perfix, default /zinc>
-```
-
 ## Logs Configurations
 
 ```shell
