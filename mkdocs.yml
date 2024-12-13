@@ -48,7 +48,8 @@ nav:
   - Introduction: README.md
   - Deploy: deploy/README.md
   - Configuration: config/README.md
-  - SeaSearch API: api/overview.md
+  - SeaSearch API: 
+    - Overview: api/overview.md
     - API Authentication: api/authentication.md
     - Index management: api/index_management.md
     - Document Operation: api/document_operation.md
