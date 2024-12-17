@@ -23,7 +23,7 @@ set ZINC_FIRST_ADMIN_USER=admin
 set ZINC_FIRST_ADMIN_PASSWORD=Complexpass#123
 ```
 !!! tip 
-In most scenarios, you can use the administrator account to provide access for applications. Only when you need to integrate multiple applications with different permissions, you should create regular users.
+    In most scenarios, you can use the administrator account to provide access for applications. Only when you need to integrate multiple applications with different permissions, you should create regular users.
 
 
 ## Regular Users

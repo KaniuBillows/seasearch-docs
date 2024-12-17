@@ -42,6 +42,8 @@ markdown_extensions:
   - markdown.extensions.toc:
       permalink: true
       toc_depth: "1-4"
+  - pymdownx.tabbed: 
+      alternate_style: true
 
 # Page tree
 nav:
