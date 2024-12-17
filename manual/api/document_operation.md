@@ -2,7 +2,7 @@
 An index stores multiple documents. Users can perform CRUD operations (Create, Read, Update, Delete) on documents via the API. In SeaSearch, each document has a unique ID.
 
 !!! tip 
-Due to architectural design, SeaSearch’s performance for single document CRUD operations is much lower than that of ElasticSearch. Therefore, we recommend using batch operations whenever possible.
+    Due to architectural design, SeaSearch’s performance for single document CRUD operations is much lower than that of ElasticSearch. Therefore, we recommend using batch operations whenever possible.
 
 ElasticSearch Document APIs contain many additional parameters that are not meaningful to SeaSearch and are not supported. All query parameters are unsupported.
 
