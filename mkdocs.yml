@@ -44,6 +44,11 @@ markdown_extensions:
       toc_depth: "1-4"
   - pymdownx.tabbed: 
       alternate_style: true
+  - pymdownx.superfences: # allows 1) nesting of fences 2) custom fences 3) disable indented code
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 # Page tree
 nav:

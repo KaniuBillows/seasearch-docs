@@ -1,7 +1,15 @@
 # SeaSearch Configuration
 For the official ZincSearch configuration, refer to: [ZincSearch Official Documentation](https://zincsearch-docs.zinc.dev/environment-variables/).
 
-The following configuration options are the ones we’ve extended. All configurations are set via environment variables.
+The following configuration options are the ones we’ve extended. All configurations can be set in `.env`.
+
+!!! tip
+    After adding new vairables or modifying the existing variables, you have to restart the service to enable changing:
+
+    ```sh
+    docker compose down
+    docker compose up -d
+    ```
 
 ## Local Storage
 - `SS_DATA_PATH`: Local storage path (default ./data). This is a required option and will be used as the SeaSearch system storage path (replaces the original `ZINC_DATA_PATH`).
@@ -33,16 +41,16 @@ These configurations are only effective when `SS_STORAGE_TYPE=s3`.
 ## Example SeaSearch Configuration
 ### Enabling Local Disk as Storage Backend
 ``` sh
-  ZINC_FIRST_ADMIN_USER=admin
-  ZINC_FIRST_ADMIN_PASSWORD=password
+  INIT_SS_ADMIN_USER=admin
+  INIT_SS_ADMIN_PASSWORD=password
   SS_DATA_PATH=./data
 ```
 
 ### Enabling S3 as Storage Backend
 === "AWS"
     ``` sh
-    ZINC_FIRST_ADMIN_USER=admin
-    ZINC_FIRST_ADMIN_PASSWORD=password
+    INIT_SS_ADMIN_USER=admin
+    INIT_SS_ADMIN_PASSWORD=password
     SS_DATA_PATH=./data
     SS_STORAGE_TYPE=s3
     SS_S3_ACCESS_ID=<your-s3-key-id>
@@ -54,8 +62,8 @@ These configurations are only effective when `SS_STORAGE_TYPE=s3`.
     ```
 === "Exoscale"
     ``` sh
-    ZINC_FIRST_ADMIN_USER=admin
-    ZINC_FIRST_ADMIN_PASSWORD=password
+    INIT_SS_ADMIN_USER=admin
+    INIT_SS_ADMIN_PASSWORD=password
     SS_DATA_PATH=./data
     SS_STORAGE_TYPE=s3
     SS_S3_ACCESS_ID=<your-s3-key-id>
@@ -66,8 +74,8 @@ These configurations are only effective when `SS_STORAGE_TYPE=s3`.
     ```
 === "Hetzner"
     ``` sh
-    ZINC_FIRST_ADMIN_USER=admin
-    ZINC_FIRST_ADMIN_PASSWORD=password
+    INIT_SS_ADMIN_USER=admin
+    INIT_SS_ADMIN_PASSWORD=password
     SS_DATA_PATH=./data
     SS_STORAGE_TYPE=s3
     SS_S3_ACCESS_ID=<your-s3-key-id>
@@ -79,8 +87,8 @@ These configurations are only effective when `SS_STORAGE_TYPE=s3`.
     ```
 === "Other Public Hosted S3 Storag"
     ```sh
-    ZINC_FIRST_ADMIN_USER=admin
-    ZINC_FIRST_ADMIN_PASSWORD=password
+    INIT_SS_ADMIN_USER=admin
+    INIT_SS_ADMIN_PASSWORD=password
     SS_DATA_PATH=./data
     SS_STORAGE_TYPE=s3
     SS_S3_ACCESS_ID=<your-s3-key-id>
@@ -92,8 +100,8 @@ These configurations are only effective when `SS_STORAGE_TYPE=s3`.
     ```
 === "Self-hosted S3 Storage"
     ```sh
-    ZINC_FIRST_ADMIN_USER=admin
-    ZINC_FIRST_ADMIN_PASSWORD=password
+    INIT_SS_ADMIN_USER=admin
+    INIT_SS_ADMIN_PASSWORD=password
     SS_DATA_PATH=./data
     SS_STORAGE_TYPE=s3
     SS_S3_ACCESS_ID=<your-s3-key-id>

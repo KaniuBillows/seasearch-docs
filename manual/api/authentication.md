@@ -19,8 +19,8 @@ SeaSearch uses accounts to manage API permissions. When the program starts for t
 
 Here is an example of setting the administrator account via shell:
 ```
-set ZINC_FIRST_ADMIN_USER=admin
-set ZINC_FIRST_ADMIN_PASSWORD=Complexpass#123
+set INIT_SS_ADMIN_USER=admin
+set INIT_SS_ADMIN_PASSWORD=Complexpass#123
 ```
 !!! tip 
     In most scenarios, you can use the administrator account to provide access for applications. Only when you need to integrate multiple applications with different permissions, you should create regular users.
