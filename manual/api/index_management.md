@@ -39,9 +39,9 @@ Analyzers can be configured as default when creating an index, or they can be se
 SeaSearch supports the following analyzers, which can be found here: [ZincSearch Documentation](https://zincsearch-docs.zinc.dev/api/index/analyze/). The concepts such as tokenization and token filters are consistent with ES and support most of the commonly used analyzers and tokenizers in ES.
 
 ### Chinese Analyzer
-To enable the Chinese analyzer in the system, set the environment variable `ZINC_PLUGIN_GSE_ENABLE=true`.
+To enable the Chinese analyzer in the system, set the environment variable `SS_PLUGIN_GSE_ENABLE=true` in `.env`.
 
-If you need more comprehensive support for Chinese word dictionaries, set `ZINC_PLUGIN_GSE_DICT_EMBED = BIG`.
+If you need more comprehensive support for Chinese word dictionaries, set `SS_PLUGIN_GSE_DICT_EMBED = BIG`.
 
 `GSE` is a standard analyzer, so you can directly assign the Chinese analyzer to fields in the mappings:
 ```
@@ -55,6 +55,15 @@ PUT /es/my-index/_mappings
   }
 }
 ```
-If users have custom tokenization habits, they can specify their dictionary files by setting the environment variable `ZINC_PLUGIN_GSE_DICT_PATH=${DICT_PATH}`, where `DICT_PATH` is the actual path to the dictionary files. The `user.txt` file contains the dictionary, and the `stop.txt` file contains stop words. Each line contains a single word.
+If users have custom tokenization habits, they can specify their dictionary files by setting the environment variable `SS_PLUGIN_GSE_DICT_PATH=${DICT_PATH}` in `.env`, where `DICT_PATH` is the actual path to the dictionary files. The `user.txt` file contains the dictionary, and the `stop.txt` file contains stop words. Each line contains a single word.
 
 GSE will load the dictionary and stop words from this path and use the user-defined dictionary to segment Chinese sentences.
+
+
+!!! tip
+    After enabling Chinese Analyzer, you have to restart the service to enable changing:
+
+    ```sh
+    docker compose down
+    docker compose up -d
+    ```

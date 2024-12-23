@@ -18,9 +18,9 @@ First, you need to specify the environment variables used by the SeaSearch image
 # For Apple's chip (M2, e.g.), you should use the images with -nomkl tags (i.e., seafileltd/seasearch-nomkl:latest)
 SEASEARCH_IMAGE=seafileltd/seasearch:latest
 
-SEASEARCH_DATA_PATH=<persistent-volume-path-of-seasearch>
-ZINC_FIRST_ADMIN_USER=<admin-username>  
-ZINC_FIRST_ADMIN_PASSWORD=<admin-password>
+SS_DATA_PATH=<persistent-volume-path-of-seasearch>
+INIT_SS_ADMIN_USER=<admin-username>  
+INIT_SS_ADMIN_PASSWORD=<admin-password>
 ```
 
 ## Restart the Service
