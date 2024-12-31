@@ -54,7 +54,9 @@ markdown_extensions:
 nav:
   - Introduction: README.md
   - Deploy: deploy/README.md
-  - Configuration: config/README.md
+  - Configuration: 
+    - Configure SeaSearch: config/README.md
+    - Configure Seafile: config/seafile.md
   - SeaSearch API: 
     - Overview: api/overview.md
     - API Authentication: api/authentication.md
