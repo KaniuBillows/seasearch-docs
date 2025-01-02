@@ -1,8 +1,4 @@
 # SeaSearch Configuration
-For the official ZincSearch configuration, refer to: [ZincSearch Official Documentation](https://zincsearch-docs.zinc.dev/environment-variables/).
-
-The following configuration options are the ones we’ve extended. All configurations can be set in `.env`.
-
 !!! tip
     After adding new vairables or modifying the existing variables, you have to restart the service to enable changing:
 
