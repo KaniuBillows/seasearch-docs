@@ -1,6 +1,6 @@
-# Deploy
+# Deploy SeaSearch
 
-SeaSearch is now only supported deploying with Docker. You can follow this document to deploy SeaSearch, initial administrator, create regular user and use SeaSearch APIs
+This guide provides detailed instructions for deploying SeaSearch, creating user accounts, and utilizing the SeaSearch APIs.
 
 ## 1. Download the seasearch.yml
 
@@ -56,7 +56,7 @@ headers = {
 ### Create a regular user
 
 !!! tip 
-    We here just show an example to describe how to use auth token to access SeaSearch APIs, you can check [here](../api/overview.md) for the whole details of SeaSearch APIS.
+    We here just show an example to describe how to use auth token to access SeaSearch APIs, you can check [here](../api/overview.md) for the whole details of SeaSearch APIs.
 
 You can create a regular user by **POST `/api/user`**, e.g.,
 
