@@ -4,8 +4,8 @@ services:
     container_name: seasearch  
     volumes:  
       - ${SS_DATA_PATH:-./data}:/opt/seasearch/data  
-    ports:  
-      - "4080:4080" 
+    #ports:  
+    #  - "4080:4080" 
     environment: 
       - ZINC_FIRST_ADMIN_USER=${INIT_SS_ADMIN_USER:-}
       - ZINC_FIRST_ADMIN_PASSWORD=${INIT_SS_ADMIN_PASSWORD:-}
@@ -20,7 +20,7 @@ services:
       - ZINC_S3_ENDPOINT=${SS_S3_ENDPOINT:-s3.us-east-1.amazonaws.com`}
       - ZINC_S3_BUCKET=${SS_S3_BUCKET:-}
       - ZINC_S3_USE_HTTPS=${SS_S3_USE_HTTPS:-true}
-      - ZINC_S3_PATH_STYLE_REQUEST=${SS_S3_PATH_STYLE_REQUEST:-https://bucketname.s3.amazonaws.com/object}
+      - ZINC_S3_PATH_STYLE_REQUEST=${SS_S3_PATH_STYLE_REQUEST:-true}
       - ZINC_S3_AWS_REGION=${SS_S3_AWS_REGION:-us-east-1}
       - ZINC_S3_SSE_C_KEY=${SS_S3_SSE_C_KEY:-}
       - ZINC_SERVER_MODE=${SS_SERVER_MODE:-}
@@ -46,6 +46,9 @@ services:
       - ZINC_PLUGIN_GSE_ENABLE = ${SS_PLUGIN_GSE_ENABLE:-false}
       - ZINC_PLUGIN_GSE_DICT_EMBED = ${SS_PLUGIN_GSE_DICT_EMBED:-}
       - ZINC_PLUGIN_GSE_DICT_PATH = ${SS_PLUGIN_GSE_DICT_PATH:-}
+    labels:
+      caddy: ${SEASEARCH_SERVER_PROTOCOL:-http}://${SEASEARCH_SERVER_HOSTNAME:?Variable is not set or empty}
+      caddy.reverse_proxy: "{{upstreams 4080}}"
     networks:
       - frontend-net
       - backend-scheduler-net
