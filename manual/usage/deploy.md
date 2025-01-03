@@ -19,7 +19,7 @@ wget -O .env https://haiwen.github.io/seasearch-docs/repo/env
 First, you need to specify the environment variables used by the SeaSearch image in the downloaded `.env` file. Definition of some variables can be found in [here](../config/README.md). Please modify the environment variables (i.e., `<...>`) ​​of the following fields in the `.env` file.
 
 !!! warning "For Apple's Chips"
-    Since Apple's chips (such as M2) do not support [MKL](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html), you need to set the relevant image to `seafileltd/seasearch-nomkl:latest`:
+    Since Apple's chips (such as M2) do not support [MKL](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html), you need to set the relevant image to `seafileltd/seasearch-nomkl:latest` if you use an Apple's chip:
 
     ```sh
     SEASEARCH_IMAGE=seafileltd/seasearch-nomkl:latest
