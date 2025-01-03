@@ -6,15 +6,14 @@ This guide provides detailed instructions for deploying SeaSearch, creating user
 
 ```bash
 wget https://haiwen.github.io/seasearch-docs/repo/seasearch.yml
+wget -O .env https://haiwen.github.io/seasearch-docs/repo/env
 ```
 
 ## 2. Modify .env file
 
-First, you need to specify the environment variables used by the SeaSearch image in the relevant `.env` file. Some environment variables can be found in [here](../config/README.md). Please add and modify the environment variables (i.e., `<...>`) ​​of the following fields in the `.env` file.
+First, you need to specify the environment variables used by the SeaSearch image in the downloaded `.env` file. Definition of some variables can be found in [here](../config/README.md). Please add and modify the environment variables (i.e., `<...>`) ​​of the following fields in the `.env` file.
 
 ```shell
-COMPOSE_FILE='...,seasearch.yml' # ... means other docker-compose yml
-
 # other environment variables in .env file
 # For Apple's chip (M2, e.g.), you should use the images with -nomkl tags (i.e., seafileltd/seasearch-nomkl:latest)
 SEASEARCH_IMAGE=seafileltd/seasearch:latest
@@ -24,10 +23,9 @@ INIT_SS_ADMIN_USER=<admin-username>
 INIT_SS_ADMIN_PASSWORD=<admin-password>
 ```
 
-## 3. Restart the Service
+## 3. Start the Service
 
 ```shell
-docker-compose down
 docker-compose up
 ```
 
@@ -35,17 +33,23 @@ docker-compose up
 
 ## 4. Access API to Create regular user via admin account
 
+To access SeaSearch APIs, you need to do the following two things:
+
+1. Get auth token
+2. Send the corresponding type of request through the corresponding URL to access [SeaSearch APIs](../api/overview.md)
+
+Here we take the example of an administrator [creating a regular user](../api/authentication.md#regular-users) to access the SeaSearch APIs
+
 ### Get auth token:
 
-!!! note
-    SeaSearch's auth token is using **base64 encode** consist of `username` and `password`, you can check [here](../api/authentication.md) for the whole details
+SeaSearch's auth token is using **base64 encode** consist of `username` and `password`: 
 
 ```sh
 echo -n 'aladdin:opensesame' | base64
 YWxhZGRpbjpvcGVuc2VzYW1l
 ```
 
-You can use your auth token to access SeaSearch APIs by adding it into `headers`, i.e.,
+Please take your auth token to access SeaSearch APIs by adding it into `headers`, i.e.,
 
 ```json
 headers = {
@@ -54,9 +58,6 @@ headers = {
 ```
 
 ### Create a regular user
-
-!!! tip 
-    We here just show an example to describe how to use auth token to access SeaSearch APIs, you can check [here](../api/overview.md) for the whole details of SeaSearch APIs.
 
 You can create a regular user by **POST `/api/user`**, e.g.,
 
@@ -72,19 +73,20 @@ curl -X POST http://127.0.0.1:4080/api/user \
 }'
 ```
 
-!!! success
-    After submitting a **POST** to `/api/user`, you will recive a response
+After submitting a **POST** to `/api/user`, you will recive a response
 
-    ```json
-    {
-        "message": "ok",
-        "id": "prabhat"
-    }
-    ```
+```json
+{
+    "message": "ok",
+    "id": "prabhat"
+}
+```
 
-    Then, you can remove the initial admin account informations in `.env` (i.e., `INIT_SS_ADMIN_USER`, `INIT_SS_ADMIN_PASSWORD`)
+Then, you can remove the initial admin account informations in `.env` (i.e., `INIT_SS_ADMIN_USER`, `INIT_SS_ADMIN_PASSWORD`)
 
 ## 5. Access SeaSearch APIs via regular user
+
+Similar to administrator accounts, regular users need to get an auth token **before** accessing the relevant APIs. Here we will take regular users creating an index as an example.
 
 ### Get auth token
 
