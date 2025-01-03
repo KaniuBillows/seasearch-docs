@@ -11,7 +11,7 @@ YWxhZGRpbjpvcGVuc2VzYW1l
 ```
 
 !!! danger
-    Basic auth is not secure. If you need to access SeaSearch over the public internet, it is strongly recommended to use HTTPS (e.g., via reverse proxy such as Nginx).
+    Basic auth is not secure. If you need to access SeaSearch over the public internet, it is strongly recommended to enable [HTTPS](../usage/https.md).
     
 ```
 "Authorization": "Basic YWRtaW46MTIzNDU2Nzg="
