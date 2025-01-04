@@ -2,7 +2,7 @@
 
 Manual for SeaSearch
 
-The website: https://seasearch-manual.seafile.com
+The website: https://seasearch-manual.seafile.com/
 
 ## Serve docs locally
 
