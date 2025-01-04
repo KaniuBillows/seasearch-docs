@@ -1,7 +1,7 @@
 site_name: SeaSearch Manual
 site_author: seafile
 docs_dir: ./manual
-site_url: https://haiwen.github.io/seasearch-docs/
+site_url: https://seasearch-manual.seafile.com
 
 repo_name: haiwen/seasearch-docs
 repo_url: https://github.com/haiwen/seasearch-docs/
@@ -56,12 +56,12 @@ nav:
   - Deployment and Usage:
     - Overview: usage/overview.md
     - Deploy SeaSearch: usage/deploy.md
-    - Use and Access SeaSearch APIs: usage/use_and_access_seasearch_apis.md
+    - Use and access SeaSearch APIs: usage/use_and_access_seasearch_apis.md
     - Https: usage/https.md
   - Configuration: config/README.md
   - SeaSearch API: 
     - Overview: api/overview.md
     - API Authentication: api/authentication.md
     - Index management: api/index_management.md
-    - Document Operation: api/document_operation.md
-    - Search Document: api/search_document.md
+    - Document operation: api/document_operation.md
+    - Search document: api/search_document.md
