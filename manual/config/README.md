@@ -35,7 +35,7 @@ These configurations are only effective when `SS_STORAGE_TYPE=s3`.
 ## Logging
 | Variable | Description | Default |
 | --- | --- | --- |
-| `SeaSearch_LOG_TO_STDOUT` | Whether to output logs to standard output as part of the SeaSearch component. | false |
+| `SS_LOG_TO_STDOUT` | Whether to output logs to standard output. | `false` |
 | `SS_LOG_DIR` | Log directory. | `/opt/seasearch/data/log` (a log subdirectory in the `SS_DATA_PATH` directory) |
 | `SS_LOG_LEVEL` | Log level. | `debug` |
 
