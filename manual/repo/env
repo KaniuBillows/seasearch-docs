@@ -31,7 +31,7 @@ SS_S3_SSE_C_KEY=<your SSE-C key>
 # log
 SS_LOG_TO_STDOUT=false
 SS_LOG_OUTPUT=true
-SS_LOG_LEVEL=debug
+SS_LOG_LEVEL=info
 
 # initial
 INIT_SS_ADMIN_USER=<admin-username>
