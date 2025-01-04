@@ -2,7 +2,7 @@
 
 Manual for SeaSearch
 
-The website: https://haiwen.github.io/seasearch-docs/
+The website: https://seasearch-manual.seafile.com
 
 ## Serve docs locally
 

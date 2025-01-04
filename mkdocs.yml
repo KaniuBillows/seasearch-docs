@@ -1,7 +1,7 @@
 site_name: SeaSearch Manual
 site_author: seafile
 docs_dir: ./manual
-site_url: https://haiwen.github.io/seasearch-docs/
+site_url: https://seasearch-manual.seafile.com
 
 repo_name: haiwen/seasearch-docs
 repo_url: https://github.com/haiwen/seasearch-docs/
