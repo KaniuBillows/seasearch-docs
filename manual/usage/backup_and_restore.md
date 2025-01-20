@@ -39,7 +39,7 @@ When SeaSearch is deployed with object storage backend, you only need to back up
 
 To directly copy the metadata file:
 ```
-cp /opt/seasearch/_metadata.bolt /backup/data/seasearch-`date +"%Y-%m-%d-%H-%M-%S"`
+cp /opt/seasearch/_metadata.bolt /backup/data/seasearch-metadata.bolt.`date +"%Y-%m-%d-%H-%M-%S"`
 ```
 This produces a separate copy of the data directory each time. You can delete older backup copies after a new one is completed.
 
@@ -61,5 +61,5 @@ cp -R /backup/data/seasearch-2025-01-18-14-35-45/ /opt/seasearch
 Simply copy the backup file to `/opt/seasearch/` and rename it to `_metadata.bolt`:
 
 ```
-cp /backup/data/seasearch-2025-01-18-14-35-45 /opt/seaserch/_metadata.bolt
+cp /backup/data/seasearch-metadata.bolt.2025-01-18-14-35-45 /opt/seaserch/_metadata.bolt
 ```
