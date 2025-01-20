@@ -44,23 +44,19 @@ This produces a separate copy of the data directory each time. You can delete ol
 ### Restore from backup
 
 Now supposed your primary SeaSearch server is broken, you're switching to a new machine. 
-Let's assume the seasearch deployment location new machine is also `/opt/seasearch`, using the backup data to restore your SeaSearch instance:
+Let's assume the seasearch deployment location new machine is also `/opt/seasearch` and the backup files is in `/backup/data/seasearch-2025-01-18-14-35-45`, using the backup data to restore your SeaSearch instance:
 
 #### Restore for disk storage
 
-Just need copy `/backup/data/seasearch` to the new machine:
+Just need to copy backup data files to the new machine:
 ```
 cp -R /backup/data/seasearch-2025-01-18-14-35-45/ /opt/seasearch
 ```
 
 #### Restore for object storage
 
-we assume the backup file path is `/backup/data/seasearch-2025-01-18-14-35-45`.
-
-We need copy the backup file to `/opt/seasearch/` and rename it to `_metadata.bolt`:
+Just need to copy the backup file to `/opt/seasearch/` and rename it to `_metadata.bolt`:
 
 ```
 cp /backup/data/seasearch-2025-01-18-14-35-45 /opt/seaserch/_metadata.bolt
 ```
-
-
