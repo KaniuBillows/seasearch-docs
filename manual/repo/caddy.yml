@@ -1,7 +1,7 @@
 services:
 
   caddy:
-    image: ${SEASEARCH_CADDY_IMAGE:-lucaslorentz/caddy-docker-proxy:2.9}
+    image: ${SEASEARCH_CADDY_IMAGE:-lucaslorentz/caddy-docker-proxy:2.9-alpine}
     restart: unless-stopped
     container_name: seasearch-caddy
     ports:
