@@ -26,6 +26,11 @@ ElasticSearch Mappings Explanation: [Mapping Types](https://www.elastic.co/guide
 
 ### Configure Settings
 Index settings control the properties of the index. The most commonly used property is `analysis`, which allows you to customize the analyzers for the index. The analyzers defined here can be used by fields in the mappings.
+SeaSearch does not support replicas and shards; users can only configure analyzers in the settings, so it does not support parameters like these:
+- number_of_shards
+- number_of_replicas
+- other ElasticSearch index settings...
+
 
 ElasticSearch Settings API: [Update Settings](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html)
 
