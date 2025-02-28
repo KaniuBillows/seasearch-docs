@@ -122,11 +122,7 @@ curl -X 'POST' \
   -H 'authorization: Basic cnVfdXNlcm5hbWU6cnVfcGFzc3dvcmQ=' \
   -H 'Content-Type: application/json' \
   -d '{
-  "name": "index_1",
-  "settings": {
-    "number_of_shards": 3,
-    "number_of_replicas": 2
-  }
+  "name": "index_1"  
 }'
 ```
 
@@ -199,13 +195,7 @@ The response lists up to 10 records matching the query results:
 ```json
 {
   "took": 1,
-  "timed_out": false,
-  "_shards": {
-    "total": 3,
-    "successful": 3,
-    "skipped": 0,
-    "failed": 0
-  },
+  "timed_out": false, 
   "hits": {
     "total": {
       "value": 1
