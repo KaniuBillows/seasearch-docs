@@ -1,6 +1,8 @@
 ## Search Documents
-### Query DSL
-To perform full-text search, use the DSL. For usage, refer to:
+
+### Basic Search
+
+You have to use DSL to perform search. For usage, refer to:
 
 [Query DSL Documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html)
 
@@ -9,11 +11,13 @@ We do not support all query parameter options provided by ES. Unsupported parame
 Search API: [Search API](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html)
 
 ### Delete by Query
+
 To delete documents based on a query, use the delete-by-query operation. Like search, we do not support some ES parameters.
 
 ElasticSearch API: [Delete by Query](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html)
 
 ### Multi-Search
+
 Multi-search supports searching multiple indexes and running different queries on each index.
 
 ElasticSearch API: [Multi-Search API Documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html)
@@ -24,13 +28,11 @@ ElasticSearch API: [Multi-Search API Documentation](https://www.elastic.co/guide
 {"query": {"bool": {"should": [{"match": {"filename": {"query": "数据库", "minimum_should_match": "-25%"}}}, {"match": {"filename.ngram": {"query": "数据库", "minimum_should_match": "80
 ```
 
-### Unified-Search
-The original search API (/es/_search) already supports searching a single index or multiple indexes. In Elasticsearch, the [search-type parameter](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/search-search.html#search-type) controls whether the results from multiple indexes are scored uniformly. 
+### Unified Search
 
-We simplified this by using a unified scoring mechanism for all results and we provide the Unified-Search API.
-The difference with our unified_search API is that ES API only has one query object, so it doesn't support using different filters for different indexes.
+When you search multiple indexes with the same query, the "/es/_search" and "/es/_msearch" APIs will calculate scores for each indexes separately. This means you cannot simply sort the results from multiple indexes by relevance. This is inconvenient in some use cases. For example, in Seafile, we create an index for each library. When we search a query for all accessible libraries, it's necesary to sort all results from all libraries based on unified scores.
 
-This API is meaningful only in this scenario: when searching the same query across multiple indexes. For example, in Seafile, we create an index for each library. When globally searching across all accessible libraries, using this API ensures consistent scoring across different repositories, providing more accurate search results.
+To support such scenarios, we provide a unified search API. Please note that the query for each index should be the same except for [filters](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html#filter-context).
 
 ```
 [POST] /api/unified_search
