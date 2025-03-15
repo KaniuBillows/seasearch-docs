@@ -117,16 +117,17 @@ You can create an index by **PUT `/Index_name`** with related settings, for exma
 
 ```sh
 curl -X 'POST' \
-  'https://seasearch.example.com/api/index' \
+  'https://seasearch.example.com/es/index_1' \
   -H 'accept: application/json' \
   -H 'authorization: Basic cnVfdXNlcm5hbWU6cnVfcGFzc3dvcmQ=' \
   -H 'Content-Type: application/json' \
-  -d '{
-  "name": "index_1",
-  "settings": {
-    "number_of_shards": 3,
-    "number_of_replicas": 2
-  }
+  -d '{  
+  "mappings:{
+    "name":{
+        "type":"text",
+        "highlightable":true
+    }
+ }    
 }'
 ```
 
@@ -142,11 +143,11 @@ Example response if index `index_1` creates successfully
 
 ### Create a document
 
-You can create a document by sending a **POST** request to `/api/<your index name>/_doc`. For example, we add a book names *Snow Crash* by the author *Neal Stephenson*:
+You can create a document by sending a **POST** request to `/es/<your index name>/_doc`. For example, we add a book names *Snow Crash* by the author *Neal Stephenson*:
 
 ```sh
 curl -X 'POST' \
-  'https://seasearch.example.com/api/index_1/_doc' \
+  'https://seasearch.example.com/es/index_1/_doc' \
   -H 'accept: application/json' \
   -H 'authorization: Basic cnVfdXNlcm5hbWU6cnVfcGFzc3dvcmQ=' \
   -H 'Content-Type: application/json' \
@@ -181,7 +182,7 @@ When you have stored a considerable number of documents in an index in SeaSearch
 
 ```sh
 curl -X 'POST' \
-  'https://seasearch.example.com/api/index_1/_search' \
+  'https://seasearch.example.com/es/index_1/_search' \
   -H 'accept: application/json' \
   -H 'authorization: Basic cnVfdXNlcm5hbWU6cnVfcGFzc3dvcmQ=' \
   -H 'Content-Type: application/json' \
@@ -199,13 +200,7 @@ The response lists up to 10 records matching the query results:
 ```json
 {
   "took": 1,
-  "timed_out": false,
-  "_shards": {
-    "total": 3,
-    "successful": 3,
-    "skipped": 0,
-    "failed": 0
-  },
+  "timed_out": false, 
   "hits": {
     "total": {
       "value": 1
@@ -235,7 +230,7 @@ You can delete a document by **DELETE** `/api/<your index name>/_doc/<your docum
 
 ```sh
 curl -X 'DELETE' \
-  'https://seasearch.example.com/api/index_1/_doc/2evSk96OVLa' \
+  'https://seasearch.example.com/es/index_1/_doc/2evSk96OVLa' \
   -H 'accept: application/json' \
   -H 'authorization: Basic cnVfdXNlcm5hbWU6cnVfcGFzc3dvcmQ='
 ```
