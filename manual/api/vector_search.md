@@ -45,11 +45,6 @@ You may choose the method that best suits your needs. The following example uses
 {"name": "jack3", "vec": [10.2, 12.41, 9.5, 22.2]}
 ```
 
-!!! warning 
-  The _bulk API strictly requires that each line adheres to the format—data must not span multiple lines. 
-  Please refer to the ES bulk documentation for further details. For modifications and deletions, you can also use the bulk API. 
-  When a document is deleted, its corresponding vector data will be removed as well.
-
 ### Searching Vectors
 
 You can search the system for the top N similar vectors and return the corresponding document information.
@@ -78,6 +73,7 @@ The API response format is the same as that for full-text search.
 
 ### Recall Query
 For vectors of the `ivf_pq` type, you can perform a recall check on the data. You can optimize and adjust your `ivf_pq` index parameters based on the results of this API.
+It returns a floating point number between 0 and 1, representing the recall rate. The closer it is to 1, the more accurate the search results are.
 
 ```
 [POST] /api/${indexName}/_recall
@@ -93,7 +89,7 @@ For vectors of the `ivf_pq` type, you can perform a recall check on the data. Yo
 #### Parameter Description
 - ${indexName}: The name of the index.
 - field: The field in the index to test. This field must be of type vector.
-- k: The number of most similar vectors to return.
+- k: The number of most similar vectors to return, with default of `10`.
 - nprobe: The number of nprobe clusters, with default of `5`.
 - query_count: The number of tests performed. The higher this number, the more stable the results will be, with a default of 100.
 
