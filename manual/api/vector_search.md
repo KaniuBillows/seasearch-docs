@@ -1,10 +1,14 @@
 ## Vecoter Search
-We have developed vector search functionality as an extension for SeaSearch. The following introduces the related APIs.
+SeaSearch supports vector search. You can create an index containing a vector field. You can then save vectors (embeddings) generated from texts or images into the index. We'll introduce related APIs in this document.
 
 ### Creating a Vector Index
-To use the vector search feature, you must create a vector index. This can be done via mapping.
+To use the vector search feature, you first have to create an index containing a vector field. This can be done via mapping API.
 
-For example, we create an index and set the vector field in the document data to be written as "vec". The index type is set to `flat` and the vector dimension is `768`.
+SeaSearch supports two types of vector index fields: `flat` and `ivfpq`.
+- Flat index directly save the input vectors. When searching for a vector, it simply computes the distances between the input vector and the saved vectors and returns the top K vectors nearest to the input vector. It's recommended to use this type if you have less than 100K vectors in the index.
+- [IVFPQ](https://towardsdatascience.com/similarity-search-with-ivfpq-9c6348fd4db3/) index uses a more efficient data structure to save the vectors. It requires less memory and less time to search for input vectors. If you have more than 100K vectors, you may consider using IVFPQ index.
+
+For example, we create an index containing a vector field named "vec". The index type is set to `flat` and the vector dimension is `768`.
 
 ```
 [PUT] /es/${indexName}/_mapping
@@ -21,13 +25,14 @@ body:
 }
 ```
 
-#### Parameter Description:
-- ${indexName}: The name of the index.
-- type: Fixed as `vector`, indicating that this is a vector index.
-- dims: The vector dimension.
-- m: A parameter required for the `ivf_pq` index, it must be divisible by dims. For example, the `dims` is `768`, the `m` could be `192`.
-- nbits: A parameter required for the `ivf_pq` index, must grater than 0, we recommend `4` or `8`.
-- vec_index_type: The index type. Supported types are `flat` and `ivf_pq`.
+You can specify the following parameters for vector indexes:
+
+- `${indexName}`: The name of the index.
+- `type`: Fixed as `vector`, indicating that this is a vector index.
+- `dims`: The vector dimension.
+- `m`: A parameter required for the `ivf_pq` index, it must be divisible by dims. For example, the `dims` is `768`, the `m` could be `192`.
+- `nbits`: A parameter required for the `ivf_pq` index, must grater than 0, we recommend `4` or `8`.
+- `vec_index_type`: The index type. Supported types are `flat` and `ivf_pq`.
 
 ### Indexing Documents Containing Vectors
 
@@ -47,7 +52,7 @@ You may choose the method that best suits your needs. The following example uses
 
 ### Searching Vectors
 
-You can search the system for the top N similar vectors and return the corresponding document information.
+You can search the index for the top K similar vectors to the input vector and return information from the documents that contain the vectors.
 
 ```
 [POST] /api/${indexName}/_search/vector
@@ -56,23 +61,23 @@ You can search the system for the top N similar vectors and return the correspon
   "query_field": "vec",
   "k": 7,
   "return_fields": ["name"],
-  "vector": [10.2, 10.40, 9.5, 22.2, ...],
-  "_source": false
+  "vector": [10.2, 10.40, 9.5, 22.2, ...]  
 }
 ```
 The API response format is the same as that for full-text search.
 
-#### Parameter Description
-- ${indexName}: The name of the index.
-- query_field: The field in the index to search. This field must be of type vector.
-- k: The number of most similar vectors to return.
-- return_fields: The names of the fields to return separately.
-- vector: The vector used for querying.
-- nprobe: Applicable only to the `ivf_pq` index type; it specifies the number of clusters to search. The higher the number, the more accurate the results.
-- _source: Controls whether to return the `_source` field. It supports a boolean value or an array specifying which fields to return.
+You can specify the following parameters for vector search:
+
+- `${indexName}`: The name of the index.
+- `query_field`: The field in the index to search. This field must be of type vector.
+- `k`: The number of most similar vectors to return.
+- `return_fields`: The names of the fields to return separately.
+- `vector`: The vector used for querying.
+- `nprobe`: Applicable only to the `ivf_pq` index type; it specifies the number of clusters to search. The higher the number, the more accurate the results.
+
 
 ### Recall Query
-For vectors of the `ivf_pq` type, you can perform a recall check on the data. You can optimize and adjust your `ivf_pq` index parameters based on the results of this API.
+For vector indexes of the `ivf_pq` type, you can evaluate the recall for search on the data. You can optimize and adjust your `ivf_pq` index parameters based on the results of this API.
 It returns a floating point number between 0 and 1, representing the recall rate. The closer it is to 1, the more accurate the search results are.
 
 ```
@@ -86,12 +91,20 @@ It returns a floating point number between 0 and 1, representing the recall rate
 }
 ```
 
-#### Parameter Description
-- ${indexName}: The name of the index.
-- field: The field in the index to test. This field must be of type vector.
-- k: The number of most similar vectors to return, with default of `10`.
-- nprobe: The number of nprobe clusters, with default of `5`.
-- query_count: The number of tests performed. The higher this number, the more stable the results will be, with a default of 100.
+You can specify the following parameters for vector recall:
+
+- `${indexName}`: The name of the index.
+- `field`: The field in the index to test. This field must be of type vector.
+- `k`: The number of most similar vectors to return, with default of `10`.
+- `nprobe`: The number of probed clusters. The default is `5`.
+- `query_count`: The higher this number, the more accurate the results will be, with a default of 100.
+
+You can try adjusting the following vecotr index parameters to improve recall:
+
+-  `m`: The larger the value of `m`, the higher the accuracy, but it will also increase the computational complexity and memory usage.
+-  `nbits`: The larger the `nbits` value, the larger the encoding book, and the more accurately the original vector can be represented. However, this also means that more bits are needed to store each index, resulting in a lower compression rate.
+-  `k`: Represents the number of most similar vectors returned in each query. If k is too low, it may generate random errors, leading to an inaccurate evaluation of recall.
+-  `nprobe`: A higher value allows you to search for more clusters, improving the recall rate by expanding the search scope, but at the cost of increasing the query latency.
 
 ## Example of Using Vector Search
 
